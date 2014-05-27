@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- START SNIPPET: xworkSample -->
+<struts>
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 编码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<constant name="struts.action.extension" value="action,," />
+
+	<!-- 让spring来管理action -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 属性配置文件 -->
+	<!-- <constant name="struts.custom.properties" value="struts.properties" 
+		/> -->
+	<!-- 国际化资源文件 -->
+	<!-- <constant name="struts.custom.i18n.resources" value="config/resources/globalMessages" 
+		/> -->
+
+	<constant name="struts.multipart.saveDir" value="c:/temp_images" />
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="SessionInterceptor" class="sessionInterceptor" />
+			<interceptor name="ActionInterceptor" class="actionInterceptor" />
+			<interceptor-stack name="sessionStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="SessionInterceptor" />
+				<interceptor-ref name="ActionInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="sessionStack" />
+		<global-results>
+			<result name="login" type="redirect">/login.jsp</result>
+			<!-- <result name="error">/WEB-INF/jsp/comm/error.jsp</result> -->
+		</global-results>
+		<!-- <global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="error" /> </global-exception-mappings> -->
+	</package>
+	<package name="AdminAction" namespace="/AdminAction" extends="default">
+		<action name="*" class="adminAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/admin/adminMain.jsp</result>
+			<result name="toAddPage">/WEB-INF/jsp/admin/addAdmin.jsp</result>
+			<result name="toUpdateAdminPage">/WEB-INF/jsp/admin/updateAdmin.jsp</result>
+		</action>
+	</package>
+	
+	<package name="CardAction" namespace="/CardAction" extends="default">
+		<action name="*" class="cardAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/card/cardMain.jsp</result>
+		</action>
+	</package>
+	
+	<package name="DishAction" namespace="/DishAction" extends="default">
+		<action name="*" class="dishAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/dish/dishMain.jsp</result>
+			<result name="toModifyDishPage">/WEB-INF/jsp/dish/modifyDish.jsp</result>
+			<result name="toAddPage">/WEB-INF/jsp/dish/addDish.jsp</result>
+			<result name="toModifyDishSortPage">/WEB-INF/jsp/dish/modifyDishSort.jsp</result>
+			<result name="toAddDishSortPage">/WEB-INF/jsp/dish/addDishSort.jsp</result>
+			<result name="toViewDish">/WEB-INF/jsp/dish/viewDish.jsp</result>
+		</action>
+	</package>
+
+	<package name="FuncAction" namespace="/FuncAction" extends="default">
+		<action name="*" class="funcAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/func/funcMain.jsp</result>
+			<result name="toAddFuncGroupPage">/WEB-INF/jsp/func/addFuncGroup.jsp</result>
+			<result name="toAddFuncPage">/WEB-INF/jsp/func/addFunc.jsp</result>
+			<result name="toModifyFuncGroupPage">/WEB-INF/jsp/func/modifyFuncGroup.jsp</result>
+			<result name="toModifyFuncPage">/WEB-INF/jsp/func/modifyFunc.jsp</result>
+		</action>
+	</package>
+	
+	<package name="login" namespace="/LoginAction" extends="default">
+		<action name="*" class="loginAction" method="{1}">
+		</action>
+	</package>
+
+	<package name="main" namespace="/" extends="default">
+		<action name="*" class="mainAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/Main.jsp</result>
+		</action>
+	</package>
+
+	<package name="MenuAction" namespace="/MenuAction" extends="default">
+		<action name="*" class="menuAction" method="{1}">
+			<result name="toModifyMenuPage">/WEB-INF/jsp/menu/modifyMenu.jsp</result>
+			<result name="toMenuMainPage">/WEB-INF/jsp/menu/menuMain.jsp</result>
+		</action>
+	</package>
+	
+	<package name="OrderAction" namespace="/OrderAction" extends="default">
+		<action name="*" class="orderAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/order/orderMain.jsp</result>
+		</action>
+	</package>
+
+	<package name="ReportAction" namespace="/ReportAction" extends="default">
+		<action name="*" class="reportAction" method="{1}">
+			<result name="toReport1MainPage">/WEB-INF/jsp/report/report1.jsp</result>
+		</action>
+	</package>
+	
+	<package name="RoleAction" namespace="/RoleAction" extends="default">
+		<action name="*" class="roleAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/role/roleMain.jsp</result>
+			<result name="toAddPage">/WEB-INF/jsp/role/addRole.jsp</result>
+			<result name="toUpdateRolePage">/WEB-INF/jsp/role/updateRole.jsp</result>
+			<result name="toRoleFuncPage">/WEB-INF/jsp/role/roleFunc.jsp</result>
+		</action>
+	</package>
+
+	<package name="ShopAction" namespace="/ShopAction" extends="default">
+		<action name="*" class="shopAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/shop/shopMain.jsp</result>
+			<result name="toAddPage">/WEB-INF/jsp/shop/addShop.jsp</result>
+			<result name="toUpdateShopPage">/WEB-INF/jsp/shop/updateShop.jsp</result>
+		</action>
+	</package>
+
+	<package name="SystemAction" namespace="/SystemAction" extends="default">
+		<action name="*" class="systemAction" method="{1}">
+			<result name="systemTree">/WEB-INF/jsp/system/systemTree.xml</result>
+			<result name="systemTree4Json">/WEB-INF/jsp/system/systemTree.json</result>
+		</action>
+	</package>
+
+	<package name="UserAction" namespace="/UserAction" extends="default">
+		<action name="*" class="UserAction" method="{1}">
+			<result name="toMainPage">/WEB-INF/jsp/user/userMain.jsp</result>
+			<result name="toAddPage">/WEB-INF/jsp/user/addUser.jsp</result>
+			<result name="toUpdateUserPage">/WEB-INF/jsp/user/updateUser.jsp</result>
+			<result name="toUserRolePage">/WEB-INF/jsp/user/userRole.jsp</result>
+		</action>
+	</package>
+
+	<package name="WithdrawAction" namespace="/WithdrawAction"
+		extends="default">
+		<action name="*" class="WithdrawAction" method="{1}">
+			<result name="toWithdrawMainPage">/WEB-INF/jsp/withdraw/withdrawMain.jsp</result>
+			<result name="toAddUserPage">/WEB-INF/jsp/user/addUser.jsp</result>
+			<result name="toUpdateUserPage">/WEB-INF/jsp/user/updateUser.jsp</result>
+			<result name="toUserRolePage">/WEB-INF/jsp/user/userRole.jsp</result>
+		</action>
+	</package>
+	
+</struts>

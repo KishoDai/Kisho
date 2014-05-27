@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ShopAction">
+    <sql id="whereQueryShop">
+       <where>
+	       <if test="sp_status != null and sp_status != ''">
+			   sp_status = #{sp_status}
+		   </if>
+		   <if test="sp_id != null and sp_id != ''">
+		       and (sp_id like '%${sp_id}%' or sp_name like '%${sp_name}%')
+		   </if>
+	   </where>
+    </sql>
+    
+	<select id="queryShopCount" resultType="int" parameterType="shop">
+		select count(*) from shop
+		<include refid="whereQueryShop"/>
+	</select>
+
+	<select id="queryPageList" parameterType="shop" resultType="shop">
+		select *
+		from shop
+		<include refid="whereQueryShop"/>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+	
+	<select id="checkShopId" resultType="string" parameterType="shop">
+	    select 1 from shop where sp_id = #{sp_id}
+	</select>
+	
+	<select id="queryShopByShopId" resultType="shop" parameterType="string">
+	     select * from shop where sp_id = #{sp_id}
+	</select>
+	
+	<insert id="addShop" parameterType="shop">
+	   insert into shop(sp_id, sp_status, sp_name, sp_shopman, sp_shopman_phone, sp_shopman_email, ur_id, sp_update_time, sp_remark)
+	   values(#{sp_id}, #{sp_status}, #{sp_name}, #{sp_shopman}, #{sp_shopman_phone}, #{sp_shopman_email}, #{ur_id}, #{sp_update_time}, #{sp_remark}) 
+	</insert>
+	
+	<delete id="deleteShops" parameterType="hashmap">
+	    delete from shop
+	    <where>
+	       sp_id in
+	       <foreach open="(" separator="," close=")" collection="sp_ids" item="sp_id">
+	           #{sp_id}
+	       </foreach>
+	    </where>
+	</delete>
+	
+	<update id="updateShop" parameterType="shop">
+	    update shop set 
+		sp_status=#{sp_status},
+		sp_name=#{sp_name},
+		sp_shopman=#{sp_shopman},
+		sp_shopman_phone=#{sp_shopman_phone},
+		sp_shopman_email=#{sp_shopman_email},
+		ur_id=#{ur_id},
+		sp_update_time=#{sp_update_time},
+		sp_remark=#{sp_remark}
+		where sp_id=#{sp_id}
+	</update>
+	
+	<select id="queryShop4Json" resultType="hashmap">
+		select sp_id as "id",sp_name as "text" from shop
+		order by sp_id asc
+	</select>
+	
+</mapper>

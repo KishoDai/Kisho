@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <package name="netinfo" namespace="/netinfo" extends="default">
+		<action name="nettitle_*" class="nettitleAction" method="{1}">
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/netinfo/nettitle_update.jsp</result>
+		</action>
+		
+		<action name="imagepath_*" class="imagepathAction" method="{1}">
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/netinfo/imagepath_update.jsp</result>
+		</action>
+	</package>
+	
+</struts>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- START SNIPPET: xworkSample -->
+<struts>
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 编码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	
+	<constant name="struts.action.extension" value="action,," />
+	
+	<!-- 让spring来管理action -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 属性配置文件 -->
+	<!-- <constant name="struts.custom.properties" value="struts.properties" 
+		/> -->
+	<!-- 国际化资源文件 -->
+	<constant name="struts.custom.i18n.resources" value="/config/properties/test-struts" />
+
+    <constant name="struts.multipart.saveDir" value="c:/temp_images"/>
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+		  <interceptor name="sessionInterceptor" class="sessionInterceptor"></interceptor>
+		  <interceptor-stack name="sessionStack">
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <interceptor-ref name="sessionInterceptor"></interceptor-ref>
+		  </interceptor-stack>
+		</interceptors>
+        <default-interceptor-ref name="sessionStack"></default-interceptor-ref>
+		<global-results>
+			<result name="to_login" type="redirect">/index.jsp</result>
+			<!--
+			<result name="error">/WEB-INF/jsp/comm/error.jsp</result>
+			  -->
+		</global-results>
+        <!-- 
+		
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+		 -->
+	</package>
+	<include file="config/struts/*-struts.xml" />
+</struts>

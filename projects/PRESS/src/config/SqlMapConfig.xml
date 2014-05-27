@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE configuration 
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="admin" type="com.press.admin.pojo.Admin" />
+		<typeAlias alias="catalog" type="com.press.comm.pojo.Catalog" />
+		<typeAlias alias="picInfo" type="com.press.comm.pojo.PicInfo" />
+		<typeAlias alias="product" type="com.press.product.pojo.Product" />
+		<typeAlias alias="product2" type="com.press.product.pojo.Product2" />
+		<typeAlias alias="producttyp" type="com.press.product.pojo.Producttyp" />
+		<typeAlias alias="pubinfo" type="com.press.comm.pojo.PubInfo" />
+		<typeAlias alias="officialinfo" type="com.press.officialinfo.pojo.OfficialInfo" />
+		<typeAlias alias="user" type="com.press.user.pojo.User" />
+		<typeAlias alias="param" type="com.press.comm.pojo.Param" />
+		<typeAlias alias="comment" type="com.press.comm.pojo.Comment" />
+	</typeAliases>
+</configuration>

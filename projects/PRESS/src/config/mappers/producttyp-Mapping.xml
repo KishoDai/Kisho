@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="producttyp">
+
+<sql id="wheresql">
+	<if test="protypnam!=null and protypnam!=''">
+		and protypnam like '%${protypnam}%'
+	</if>
+</sql>
+   
+    
+    <select id="queryCount" parameterType="producttyp" resultType="java.lang.Integer">
+		select count(protypid)
+		from t_pro_typ
+		where 1=1 
+		<include refid="wheresql"/>
+	</select>
+	
+	<select id="queryPageList" parameterType="producttyp" resultType="producttyp" >
+	     select *
+		from t_pro_typ
+		where 1=1
+		<include refid="wheresql"/>
+		<if test="sort!=null and sort!=''">
+		   order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+    
+	<select id="queryProducttyp" parameterType="java.lang.String"
+		resultType="producttyp">
+		select *
+		from t_pro_typ
+		where protypid=#{protypid}
+	</select>
+
+	<update id="updateProducttyp" parameterType="producttyp">
+		update t_pro_typ
+		set
+		protypnam=#{protypnam},sortnum=#{sortnum}
+		where protypid=#{protypid}
+	</update>
+
+	<insert id="insertProducttyp" parameterType="producttyp">
+		insert into
+		t_pro_typ(protypid,protypnam,sortnum)
+		values(#{protypid},#{protypnam},#{sortnum})
+	</insert>
+
+	<delete id="deleteProducttyp" parameterType="java.lang.String">
+		delete from t_pro_typ
+		where protypid=#{protypid}
+	</delete>
+
+
+
+
+
+
+
+
+ <sql id="wheresql2" >
+    <if test="protypid!=null and protypid!=''">
+	      and t1.protypid=#{protypid}
+	   </if>
+	    <if test="pronam!=null and pronam!=''">
+	      and t3.pronam=#{pronam}
+	   </if>
+    </sql>
+
+
+    <select id="queryCount2" parameterType="product2" resultType="java.lang.Integer">
+	   select count(t3.proid)
+	   from t_pro_typ t1
+	   left outer join t_rel_pro_typ t2
+	   on t1.protypid = t2.protypid 
+	   left outer join t_pro_info t3
+	   on t2.proid = t3.proid
+	   left outer join t_catalog t4
+	   on t3.catid = t4.catid
+	   where 1=1 
+	   <include refid="wheresql2"/>
+		
+	</select>
+
+	<select id="queryPageList2" parameterType="java.lang.String"
+		resultType="product2">
+		select t1.*,t2.relid,t3.*,t4.catnam
+		from t_pro_typ t1
+		inner  join t_rel_pro_typ t2
+		on t1.protypid = t2.protypid
+		inner  join t_pro_info t3
+		on t2.proid = t3.proid
+		inner  join t_catalog t4
+		on t3.catid = t4.catid
+		where 1=1
+		<include refid="wheresql2" />
+		<if test="sort =='protypnam'">
+			order by t1.${sort} ${order}
+		</if>
+		<if test="sort =='pronam'">
+			order by t3.${sort} ${order}
+		</if>
+		
+		limit #{startnum},#{limitcount}
+	</select>
+	
+	<select id="queryProducttypList" resultType="producttyp">
+	  select * 
+	  from t_pro_typ
+	  order by sortnum asc
+	</select>
+	
+	<delete id="deleteRelprotyp" parameterType="java.lang.String">
+	   delete from t_rel_pro_typ
+	   where relid=#{relid} 
+	   
+	</delete>
+	
+	<delete id="deleteRelprotyp2" parameterType="product2">
+	  delete from t_rel_pro_typ
+	  where proid=#{proid}
+	   and  protypid=#{protypid}
+	</delete>
+	
+	<delete id="deleteRelprotyp3" parameterType="java.lang.String">
+	  delete from t_rel_pro_typ
+	  where proid=#{proid}
+	</delete>
+	<delete id="deleteRelprotyp4" parameterType="java.lang.String">
+	  delete from t_rel_pro_typ
+	  where protypid=#{protypid}
+	</delete>
+	
+	<insert id="insertRelprotyp" parameterType="product2">
+	   insert into t_rel_pro_typ(relid,protypid,proid)
+	   values(#{relid},#{protypid},#{proid})
+	</insert>
+</mapper>

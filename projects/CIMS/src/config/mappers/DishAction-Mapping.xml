@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="DishAction">
+	<select id="queryShop" resultType="hashmap">
+		select sp_id "id",sp_name
+		"text" from shop
+		order by sp_id asc
+	</select>
+
+	<select id="queryDishByShopId" parameterType="string"
+		resultType="hashmap">
+		SELECT
+		*
+		FROM
+		dish
+		WHERE
+		sp_id = #{sp_id}
+	</select>
+
+	<select id="queryShopNameByShopId" parameterType="string"
+		resultType="string">
+		SELECT
+		sp_name
+		FROM
+		shop
+		WHERE
+		sp_id = #{sp_id}
+	</select>
+
+	<select id="queryDishByDishId" parameterType="string"
+		resultType="dish">
+		select * from dish where dh_id = #{dh_id}
+	</select>
+	
+	<select id="queryDishByDishIdAndShopId" parameterType="dish" resultType="dish">
+	    select * from dish where dh_id = #{dh_id} and sp_id = #{sp_id}
+	</select>
+	
+	<select id="queryDishByParentId" parameterType="string"
+		resultType="hashmap">
+		select * from dish where dh_parentid = #{parentId}
+	</select>
+	
+	<delete id="deleteDishByDishId" parameterType="string">
+	     delete from dish where dh_id = #{dh_id}
+	</delete>
+	
+	<delete id="deleteDishByDishIds" parameterType="hashmap">
+	    delete from dish
+	    <where>
+	       dh_id in
+	       <foreach open="(" separator="," close=")" item="dishId" collection="needDeleteDishIdList">
+	           #{dishId}
+	       </foreach>
+	    </where>
+	</delete>
+	
+	<insert id="insertDish" parameterType="dish">
+	   insert into dish(dh_id,dh_name,dh_parentid,dh_price,dh_discount,dh_describe,sp_id,dh_isleaf)
+	   values(#{dh_id},#{dh_name},#{dh_parentid},#{dh_price},#{dh_discount},#{dh_describe},#{sp_id},#{dh_isleaf})
+	</insert>
+	
+	<select id="queryRootIdByShopId" parameterType="string" resultType="string">
+	   select dh_id from dish where dh_parentid = '0' and sp_id = #{sp_id}
+	</select>
+	 
+	<select id="queryDish" resultType="hashmap">
+	   select * from dish
+	</select> 
+	
+	<select id="queryDishByParentIdWithShop" resultType="hashmap" parameterType="string">
+	    select * from dish where sp_id = (
+	     select sp_id from dish where dh_parentid = #{dh_parentid} limit 0,1
+	   )
+	</select>
+	
+	<update id="updateDish" parameterType="dish">
+		update dish
+		<set>
+	        dh_name = #{dh_name},
+	        dh_parentid = #{dh_parentid},
+	        dh_price = #{dh_price},
+	        dh_discount = #{dh_discount},
+	        dh_describe = #{dh_describe}
+		</set>
+		<where>
+	        dh_id = #{dh_id} and sp_id = #{sp_id}
+		</where>
+    </update>
+    
+    <update id="updateMove" parameterType="hashmap">
+        update dish
+        <set>
+           dh_parentid = #{target_dh_id}
+        </set>
+        <where>
+           dh_id = #{source_dh_id}
+           and sp_id = #{shop_id}
+        </where>
+    </update>
+    
+</mapper>

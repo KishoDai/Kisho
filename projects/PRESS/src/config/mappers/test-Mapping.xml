@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="basic">
+	<select id="querySysdate" resultType="java.lang.String">
+		SELECT SYSDATE
+		FROM DUAL
+	</select>
+	<select id="selectStudent" resultType="java.util.HashMap">
+		SELECT * FROM STUDENT
+		WHERE ID=#{ID}
+	</select>
+	<insert id="insertAdmin">
+		INSERT INTO t_admin(adminid,password)
+		VALUES(#{adminid},#{password})
+	</insert>
+</mapper>

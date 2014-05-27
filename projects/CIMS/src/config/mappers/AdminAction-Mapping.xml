@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="AdminAction">
+	<select id="queryAdminCount" resultType="int">
+		select count(*) from user where ur_level in('1','2')
+	</select>
+
+	<select id="queryPageList" parameterType="user" resultType="hashmap">
+		select *
+		from user
+		<where>
+		   ur_level in('1','2')
+		</where>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+
+	<select id="queryAdminByUserId" resultType="user" parameterType="string">
+		select * from user where ur_id = #{ur_id}
+	</select>
+
+	<insert id="addAdmin" parameterType="user">
+		insert into user(ur_id, ur_name,ur_password,ur_status,ur_level,sp_id)
+		values(#{ur_id}, #{ur_name},#{ur_password},#{ur_status},'1',#{sp_id})
+	</insert>
+	
+	<delete id="deleteAdminByUserId" parameterType="string">
+		delete from user where ur_id = #{ur_id}
+	</delete>
+
+	<update id="updateAdmin" parameterType="user">
+		update user
+		<set>
+			ur_name=#{ur_name},
+			ur_status=#{ur_status},
+			sp_id = #{sp_id}
+		</set>
+		<where>
+			ur_id=#{ur_id}
+		</where>
+	</update>
+
+</mapper>

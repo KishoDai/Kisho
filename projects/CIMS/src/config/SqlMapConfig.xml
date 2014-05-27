@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE configuration 
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="menu" type="com.csms.pojo.Menu" />
+
+		<typeAlias alias="shop" type="com.csms.pojo.Shop" />
+
+		<typeAlias alias="dish" type="com.csms.pojo.Dish" />
+
+		<typeAlias alias="func" type="com.csms.pojo.Func" />
+
+		<typeAlias alias="role" type="com.csms.pojo.Role" />
+
+		<typeAlias alias="roleFuncRel" type="com.csms.pojo.RoleFuncRel" />
+
+		<typeAlias alias="user" type="com.csms.pojo.User" />
+
+		<typeAlias alias="userRoleRel" type="com.csms.pojo.UserRoleRel" />
+
+		<typeAlias alias="rc" type="com.csms.pojo.ReportCondition" />
+
+		<typeAlias alias="adminFunc" type="com.csms.pojo.AdminFunc" />
+
+		<typeAlias alias="withdraw" type="com.csms.pojo.Withdraw" />
+
+		<typeAlias alias="card" type="com.csms.pojo.Card" />
+		
+		<typeAlias alias="custOrder" type="com.csms.pojo.CustOrder" />
+		
+		<typeAlias alias="orderDish" type="com.csms.pojo.OrderDish" />
+	</typeAliases>
+</configuration>

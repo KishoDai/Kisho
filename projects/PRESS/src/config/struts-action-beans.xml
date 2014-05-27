@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean name="indexAction" class="com.press.comm.action.IndexAction" />
+	<bean name="loginAction" class="com.press.login.action.LoginAction">
+		<property name="module" value="login" />
+		<property name="submodule" value="login" />
+	</bean>
+	<bean name="sessionInterceptor" class="com.press.comm.interceptor.SessionInterceptor" />
+	<bean name="productAction" class="com.press.product.action.ProductAction">
+		<property name="module" value="product" />
+		<property name="submodule" value="product" />
+	</bean>
+	<bean name="producttypAction" class="com.press.product.action.ProducttypAction">
+		<property name="module" value="product" />
+		<property name="submodule" value="producttyp" />
+	</bean>
+	<bean name="product2Action" class="com.press.product.action.Product2Action">
+		<property name="module" value="product" />
+		<property name="submodule" value="product2" />
+	</bean>
+	<!-- 
+	<bean name="pubInfoAction" class="com.press.comm.action.PubInfoAction">
+		<property name="module" value="pubinfo" />
+		<property name="submodule" value="pubinfo" />
+	</bean>
+	 -->
+	<bean name="infopubinfoAction" class="com.press.info.action.InfoPubInfoAction">
+		<property name="module" value="pubinfo" />
+		<property name="submodule" value="infopubinfo" />
+	</bean>
+	<bean name="activitypubinfoAction" class="com.press.activity.action.ActivityPubInfoAction">
+		<property name="module" value="pubinfo" />
+		<property name="submodule" value="activitypubinfo" />
+	</bean>
+	<bean name="healthguidepubinfoAction" class="com.press.healthguide.action.HealthGuidePubInfoAction">
+		<property name="module" value="pubinfo" />
+		<property name="submodule" value="healthguidepubinfo" />
+	</bean>
+	<bean name="adminAction" class="com.press.admin.action.AdminAction">
+		<property name="module" value="admin" />
+		<property name="submodule" value="admin" />
+	</bean>
+	<!--  
+	<bean name="catalogAction" class="com.press.comm.action.CatalogAction">
+		<property name="module" value="catalog" />
+		<property name="submodule" value="catalog" />
+	</bean>
+	-->
+	<bean name="productcatalogAction" class="com.press.product.action.ProductCatalogAction">
+		<property name="module" value="catalog" />
+		<property name="submodule" value="productcatalog" />
+	</bean>
+	<bean name="infocatalogAction" class="com.press.info.action.InfoCatalogAction">
+		<property name="module" value="catalog" />
+		<property name="submodule" value="infocatalog" />
+	</bean>
+	<bean name="activitycatalogAction" class="com.press.activity.action.ActivityCatalogAction">
+		<property name="module" value="catalog" />
+		<property name="submodule" value="activitycatalog" />
+	</bean>
+	<bean name="healthguidecatalogAction" class="com.press.healthguide.action.HealthGuideCatalogAction">
+		<property name="module" value="catalog" />
+		<property name="submodule" value="healthguidecatalog" />
+	</bean>
+	<bean name="picinfoAction" class="com.press.comm.action.PicInfoAction">
+		<property name="module" value="picinfo" />
+		<property name="submodule" value="picinfo" />
+	</bean>
+	<bean name="officialinfoAction" class="com.press.officialinfo.action.OfficialInfoAction">
+		<property name="module" value="officialinfo" />
+		<property name="submodule" value="officialinfo" />
+	</bean>
+	<bean name="nettitleAction" class="com.press.netinfo.action.NetTitleAction">
+		<property name="module" value="netinfo" />
+		<property name="submodule" value="nettitle" />
+	</bean>
+	<bean name="imagepathAction" class="com.press.netinfo.action.ImagePathAction">
+		<property name="module" value="netinfo" />
+		<property name="submodule" value="imagepath" />
+	</bean>
+	<bean name="userAction" class="com.press.user.action.UserAction">
+		<property name="module" value="user" />
+		<property name="submodule" value="user" />
+	</bean>
+	<bean name="commentAction" class="com.press.comm.action.CommentAction">
+		<property name="module" value="comment" />
+		<property name="submodule" value="comment" />
+	</bean>
+	<bean name="fileuploadAction" class="com.press.fileupload.action.FileuploadAction">
+		<property name="module" value="fileupload" />
+		<property name="submodule" value="fileupload" />
+	</bean>
+</beans>  

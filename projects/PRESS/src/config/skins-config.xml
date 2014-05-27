@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skins>
+	<skin name="默认" value="base" />
+	<skin name="black-tie" value="black-tie" />
+	<skin name="blitzer" value="blitzer" />
+	<skin name="humanity" value="humanity" />
+	<skin name="cupertino" value="cupertino" />
+	<skin name="dark-hive" value="dark-hive" />
+	<skin name="dark-vader" value="dark-vader" />
+	<skin name="dot-luv" value="dot-luv" />
+	<skin name="eggplant" value="eggplant" />
+	<skin name="exite-bike" value="exite-bike" />
+	<skin name="flick" value="flick" />
+	<skin name="le-frog" value="le-frog" />
+	<skin name="lightness" value="lightness" />
+	<skin name="mint-choc" value="mint-choc" />
+	<skin name="overcast" value="overcast" />
+	<skin name="sunny" value="sunny" />
+	<skin name="trontastic" value="trontastic" />
+	<skin name="swanky-purse" value="swanky-purse" />
+	<skin name="start" value="start" />
+	<skin name="hot-sneaks" value="hot-sneaks" />
+	<skin name="south-street" value="south-street" />
+	<skin name="smoothness" value="smoothness" />
+</skins>

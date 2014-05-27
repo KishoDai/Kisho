@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="RoleAction">
+
+	<select id="queryRoleCount" resultType="int">
+		select count(*) from role
+	</select>
+
+	<select id="queryPageList" parameterType="role" resultType="hashmap">
+		select *
+		from role
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+	
+	<select id="queryRoleByRoleId" resultType="role" parameterType="string">
+	     select * from role where re_id = #{re_id}
+	</select>
+	
+	<insert id="addRole" parameterType="role">
+	   insert into role(re_id, re_name,re_status)
+	   values(#{re_id}, #{re_name},#{re_status}) 
+	</insert>
+	
+	<delete id="deleteRoleByRoleId" parameterType="string">
+	    delete from role where re_id = #{re_id}
+	</delete>
+	
+	<update id="updateRole" parameterType="role">
+	    update role 
+	    <set>
+		   re_name=#{re_name},
+		   re_status=#{re_status}
+		</set>
+		<where>
+		   re_id=#{re_id}
+		</where>
+	</update>
+	
+	<insert id="addRoleFuncRel" parameterType="roleFuncRel">
+	   insert into role_func_rel(re_id,fn_id)
+	   values(#{re_id},#{fn_id})
+	</insert>
+	
+	<select id="queryRoleFuncRelByRoleIdAndFuncId" parameterType="roleFuncRel" resultType="roleFuncRel">
+	   select * from role_func_rel where re_id = #{re_id} and fn_id = #{fn_id}
+	</select>
+	
+	<delete id="delRoleFuncRel" parameterType="roleFuncRel">
+	  delete from  role_func_rel
+	  <where>
+	     re_id = #{re_id} and fn_id = #{fn_id}
+	  </where>
+	</delete>
+	
+	<select id="queryRoleFuncRelByRoleId" parameterType="roleFuncRel" resultType="hashmap">
+	   select * from role_func_rel where re_id = #{re_id}
+	</select>
+</mapper>

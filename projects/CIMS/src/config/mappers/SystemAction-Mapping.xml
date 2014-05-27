@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="SystemAction">
+
+	<select id="queryValueByKey" parameterType="string" resultType="string">
+		select cg_value from config where cg_id = #{cg_id}
+	</select>
+
+	<select id="queryFuncsByUserId" parameterType="string"
+		resultType="func">
+		SELECT
+		d.*
+		FROM
+		USER a,
+		role b,
+		user_role_rel c,
+		func d ,
+		role_func_rel e
+		WHERE
+		a.ur_id = c.ur_id
+		AND b.re_id = c.re_id
+		AND b.re_status = '0'
+		AND b.re_id = e.re_id
+		AND d.fn_id = e.fn_id
+		AND a.ur_id = #{ur_id}
+	</select>
+</mapper>

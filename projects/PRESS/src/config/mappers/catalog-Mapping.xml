@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="catalog">
+     <sql id="wheresql" >
+        <if test="catnam!=null and catnam!=''">
+        and catnam like '%${catnam}%'
+        </if>
+    </sql>
+    
+    <select id="queryCount" parameterType="catalog" resultType="java.lang.Integer">
+		select count(catid)
+		from t_catalog
+		where cattyp=#{cattyp}
+		<include refid="wheresql"/>
+	</select>
+	
+	<select id="queryPageList" parameterType="catalog" resultType="catalog" >
+	     select *
+		from t_catalog
+		where cattyp=#{cattyp}
+		<include refid="wheresql"/>
+		<if test="sort!=null and sort!=''">
+		   order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+    
+	<select id="queryCatalogList" parameterType="catalog"
+		resultType="catalog">
+		select *
+		from t_catalog
+		where cattyp=#{cattyp}
+		order by catnam asc
+	</select>
+	
+	<select id="queryCatalogList2" parameterType="java.lang.String"
+		resultType="catalog">
+		select *
+		from t_catalog
+		where cattyp=#{cattyp}
+		order by catnam asc
+	</select>
+	
+	<select id="queryCatalog" parameterType="java.lang.String"
+		resultType="catalog">
+		select *
+		from t_catalog
+		where catid=#{catid}
+	</select>
+
+	<update id="updateCatalog" parameterType="catalog">
+		update t_catalog
+		set
+		catnam=#{catnam},sortnum=#{sortnum}
+		where catid=#{catid}
+	</update>
+
+	<insert id="insertCatalog" parameterType="catalog">
+		insert into
+		t_catalog(catid,catnam,cattyp,sortnum)
+		values(#{catid},#{catnam},#{cattyp},#{sortnum})
+	</insert>
+
+	<delete id="deleteCatalog" parameterType="java.lang.String">
+		delete from t_catalog
+		where catid=#{catid}
+	</delete>
+</mapper>

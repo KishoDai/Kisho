@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="StepSequence">
+	<select id="queryStepSequenceById" parameterType="string"
+		resultType="hashmap">
+		select * from stepseq where id = #{stepseq}
+	</select>
+
+	<insert id="addStepSequence" parameterType="hashmap">
+		insert into stepseq(id,step,curval)
+		values(#{id},#{step},#{curval})
+	</insert>
+    
+    <update id="updateStepSequence" parameterType="hashmap">
+        update stepseq set curval = #{curval} where id = #{id}
+    </update>
+</mapper>

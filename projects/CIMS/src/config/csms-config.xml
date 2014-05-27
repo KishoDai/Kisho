@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+   http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<util:map id="sysInfo">
+		<!-- 初始密码 -->
+		<entry key="initpassword" value="888888" />
+		<!-- session会话时间 -->
+		<entry key="maxInactiveInterval" value="1200" />
+	</util:map>
+
+	<util:map id="infoConfig">
+		<entry key="loadingMessage" value="系统正在为您奋力的加载中..." />
+		<entry key="systemError" value="系统内部异常，请联系系统管理员" />
+		<entry key="systemName" value="餐饮综合服务管理系统" />
+
+		<entry key="AdminAction_addAdmin_success" value="添加管理员成功" />
+		<entry key="AdminAction_addAdmin_failure" value="管理员编号已存在" />
+		<entry key="AdminAction_delAdmin_success" value="删除管理员成功" />
+		<entry key="AdminAction_updateAdmin_sucess" value="修改管理员信息成功" />
+
+		<entry key="CardAction_returnCard_failure_1" value="美食卡不存在" />
+		<entry key="CardAction_returnCard_failure_2" value="会员卡不允许退卡" />
+		<entry key="CardAction_returnCard_success" value="退卡成功" />
+		<entry key="CardAction_addValue_sucess" value="充值成功" />
+		<entry key="CardAction_addCard_failure" value="美食卡编号已存在" />
+		<entry key="CardAction_addCard_success" value="开卡成功" />
+		
+		<entry key="DishAction_move_success" value="菜品或者菜品分类移动成功" />
+		<entry key="DishAction_removeDish_success" value="删除菜品成功" />
+		<entry key="DishAction_removeDishSort_success" value="删除菜品分类成功" />
+		<entry key="DishAction_addDish_failure" value="编号已存在" />
+		<entry key="DishAction_addDish_success" value="添加菜品或者分类成功" />
+		<entry key="DishAction_updateDish_success" value="修改成功" />
+
+		<entry key="FuncAction_move_success" value="功能移动成功" />
+		<entry key="FuncAction_addEntity_failure" value="功能或者功能组编号已存在" />
+		<entry key="FuncAction_addEntity_success" value="功能或者功能组添加成功" />
+		<entry key="FuncAction_updateEntity_success" value="功能或者功能组修改成功" />
+		<entry key="FuncAction_removeFunc_success" value="功能删除成功" />
+		<entry key="FuncAction_removeFuncGroup_success" value="功能组删除成功" />
+		
+		<entry key="LoginAction_check_failure_1" value="用户名或密码错误" />
+		<entry key="LoginAction_check_failure_2" value="用户已停用" />
+		<entry key="LoginAction_check_success" value="登录成功" />
+
+		<entry key="OrderAction_loadCardJsonByCardId_failure" value="卡号不存在" />
+		
+		<entry key="UserAction_recoverInitPwd_success" value="密码恢复成功" />
+		<entry key="UserAction_addUserRoleRel_success" value="添加用户角色成功" />
+		<entry key="UserAction_delUserRoleRel_success" value="删除用户角色成功" />
+		<entry key="UserAction_delUser_success" value="删除用户成功" />
+		<entry key="UserAction_addUser_failure" value="用户编号已存在" />
+		<entry key="UserAction_addUser_success" value="添加用户成功" />
+		<entry key="UserAction_updateUser_success" value="修改用户成功" />
+		<entry key="UserAction_addUserRoleRels_success" value="添加用户角色成功" />
+		<entry key="UserAction_delUserRoleRels_success" value="删除用户角色成功" />
+		
+	</util:map>
+</beans>  

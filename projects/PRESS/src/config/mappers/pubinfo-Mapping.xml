@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="pubinfo">
+     <!-- 查询条件 -->
+     <sql id="wheresql">
+    </sql>
+    
+	<select id="queryCount" parameterType="pubinfo" resultType="java.lang.Integer">
+		select count(info.infoid)
+		from t_pub_info info 
+		inner join t_catalog cat
+		on info.catid = cat.catid
+		where info.infotyp=#{infotyp}
+		<include refid="wheresql"/>
+	</select>
+	
+	<select id="queryPageList" parameterType="pubinfo" resultType="pubinfo">
+	   select info.*,cat.catnam
+		from t_pub_info info 
+		inner join t_catalog cat
+		on info.catid = cat.catid
+		where info.infotyp=#{infotyp}
+		<include refid="wheresql"/>
+		<if test="sort!=null and sort!=''">
+		   order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+
+	<select id="queryPubInfoList" parameterType="pubinfo" resultType="pubinfo">
+		select info.*,cat.catnam
+		from t_pub_info info 
+		left outer join t_catalog cat
+		on info.catid = cat.catid
+		where info.infotyp=#{infotyp}
+	</select>
+	
+	<insert id="insertPubinfo" parameterType="pubinfo">
+	   insert into t_pub_info(infoid,infotitle,infocontent,catid,infotyp,isshow,pubtime,createtime,showstarttime,showendtime,createid) 
+	   values(#{infoid},#{infotitle},#{infocontent},#{catid},#{infotyp},#{isshow},#{pubtime},#{createtime},#{showstarttime},#{showendtime},#{createid})
+	</insert>
+	
+	<select id="queryPubinfo" resultType="pubinfo">
+	   select * 
+	   from t_pub_info
+	   where infoid=#{infoid}
+	</select>
+	
+	<update id="updatePubinfo" parameterType="pubinfo">
+	  update t_pub_info
+	  set infotitle=#{infotitle},
+	      infocontent=#{infocontent},
+	      catid=#{catid},
+	      isshow=#{isshow},
+	      pubtime=#{pubtime},
+	      lastmodifytime=#{lastmodifytime},
+	      showstarttime=#{showstarttime},
+	      showendtime=#{showendtime},
+	      modifyid=#{modifyid}
+	  where infoid=#{infoid}
+	</update>
+	
+	<delete id="deletePubinfo" parameterType="java.lang.String">
+	   delete from t_pub_info
+	   where infoid=#{infoid}
+	</delete>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="WithdrawAction">
+
+	<select id="queryWithdrawCount" parameterType="string" resultType="int">
+		select count(*) from withdraw_process where wp_created_ur_id = #{wp_created_ur_id}
+	</select>
+
+	<select id="queryPageList" parameterType="withdraw" resultType="hashmap">
+		select *
+		from withdraw_process
+		 where wp_created_ur_id = #{wp_created_ur_id}
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+
+	<select id="queryWithdrawByWithdrawId" resultType="withdraw" parameterType="string">
+		select * from withdraw_process where wp_id = #{wp_id}
+	</select>
+
+	<insert id="addWithdraw" parameterType="withdraw">
+		insert into withdraw_process(wp_id, cd_id,or_id,wp_created_ur_id,sp_id,wp_status,wp_startdatetime)
+		values(#{wp_id}, #{cd_id},#{or_id},#{wp_created_ur_id},#{sp_id},#{wp_status},#{wp_startdatetime})
+	</insert>
+	
+	<select id = "queryWithdrawOrderDishList" resultType="hashmap" parameterType="string">
+	    select a.*, concat(a.dh_id,'-',b.dh_name) as dh_name from withdraw_order_dish a 
+	    left join dish b
+	    on a.dh_id = b.dh_id
+	     where a.or_id = #{or_id} 
+	</select>
+	
+	<select id="queryOrderDishListByOrderId" resultType="hashmap" parameterType="string">
+	    select concat(a.dh_id,'-',b.dh_name) as dh_name,a.* from order_dish a  
+	    left join dish b
+	    on a.dh_id = b.dh_id
+	    where or_id = #{or_id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ReportAction">
+    <sql id="whereQueryReport1">
+        <where>
+	         a.or_datetime between #{startDate} and #{endDate}
+		 </where>
+    </sql>
+    
+    <sql id="groupByRepport1">
+         GROUP BY 
+		 <if test="dateType == 0">
+		    substring(a.or_datetime,1,10),
+		 </if>
+		 <if test="dateType == 1">
+		    substring(a.or_datetime,1,7),
+		 </if>
+		 a.sp_id, c.sp_name
+		 <if test="sortType == 1">
+		    ,e.dh_id,e.dh_name
+		 </if>
+		 <if test="sortType == 2">
+		    ,e.dh_id,e.dh_name,d.dh_id,d.dh_name
+		 </if>
+    </sql>
+
+	<select id="queryReport1Count" resultType="int" parameterType="rc">
+		SELECT
+		   	count(*)
+		FROM
+		    cust_order a INNER JOIN order_dish b
+		    ON a.or_id = b.or_id
+		    LEFT JOIN csms.shop c
+		    ON a.sp_id = c.sp_id
+		    LEFT JOIN dish d
+		    ON d.dh_id = b.dh_id
+		    LEFT JOIN dish e
+		    ON d.dh_parentid = e.dh_id
+		<include refid="whereQueryReport1"/>
+	</select>
+
+   <sql id="queryReport1">
+      SELECT
+		    <if test="dateType == 0">
+			    substring(a.or_datetime,1,10) as "or_datetime",
+			</if>
+			<if test="dateType == 1">
+			    substring(a.or_datetime,1,7) as "or_datetime",
+			</if>
+		    <if test="sortType == 1">
+		       e.dh_id as "dh_parentid",
+		       e.dh_name as "dh_parentname",
+		    </if>
+		    <if test="sortType == 2">
+		       e.dh_id as "dh_parentid",
+		       e.dh_name as "dh_parentname",
+			   d.dh_id as "dh_id",
+			   d.dh_name as "dh_name",
+		    </if>
+		    c.sp_id as "sp_id",
+		    c.sp_name as "sp_name",
+		    SUM(b.od_amount*b.dh_price*b.dh_discount) as totalMoney
+		FROM
+		    cust_order a INNER JOIN order_dish b
+		    ON a.or_id = b.or_id
+		    LEFT JOIN csms.shop c
+		    ON a.sp_id = c.sp_id
+		    LEFT JOIN dish d
+		    ON d.dh_id = b.dh_id
+		    LEFT JOIN dish e
+		    ON d.dh_parentid = e.dh_id
+		<include refid="whereQueryReport1"/>
+		<include refid="groupByRepport1"/>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+   </sql>
+
+	<select id="queryReport1PageList" parameterType="rc" resultType="hashmap">
+		<include refid="queryReport1"/>
+		limit #{startnum},#{limitcount}
+	</select>
+	
+	<select id="queryReport1ToExcel" parameterType="rc" resultType="hashmap">
+		<include refid="queryReport1"/>
+	</select>
+
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <package name="pubinfo" namespace="/pubinfo" extends="default">
+        <!-- 
+		<action name="pubinfo_*" class="pubInfoAction" method="{1}">
+		    <result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/pubinfo/pubinfo_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/pubinfo/pubinfo_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/pubinfo/pubinfo_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/pubinfo/pubinfo_view.jsp</result>
+			<result name="redirect_index" type="redirect">/pubinfo/pubinfo_to_index.action</result>
+		</action>
+		 -->
+		<action name="infopubinfo_*" class="infopubinfoAction" method="{1}">
+		    <result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/pubinfo/pubinfo_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/pubinfo/pubinfo_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/pubinfo/pubinfo_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/pubinfo/pubinfo_view.jsp</result>
+			<result name="to_editinfocontent">/WEB-INF/jsp/pubinfo/pubinfo_content.jsp</result>
+			<result name="redirect_index" type="redirect">/pubinfo/infopubinfo_to_index.action</result>
+		</action>
+		<action name="activitypubinfo_*" class="activitypubinfoAction" method="{1}">
+		    <result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/pubinfo/pubinfo_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/pubinfo/pubinfo_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/pubinfo/pubinfo_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/pubinfo/pubinfo_view.jsp</result>
+			<result name="to_editinfocontent">/WEB-INF/jsp/pubinfo/pubinfo_content.jsp</result>
+			<result name="redirect_index" type="redirect">/pubinfo/activitypubinfo_to_index.action</result>
+		</action>
+		<action name="healthguidepubinfo_*" class="healthguidepubinfoAction" method="{1}">
+		    <result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/pubinfo/pubinfo_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/pubinfo/pubinfo_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/pubinfo/pubinfo_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/pubinfo/pubinfo_view.jsp</result>
+			<result name="to_editinfocontent">/WEB-INF/jsp/pubinfo/pubinfo_content.jsp</result>
+			<result name="redirect_index" type="redirect">/pubinfo/healthguidepubinfo_to_index.action</result>
+		</action>
+	</package>
+	
+</struts>

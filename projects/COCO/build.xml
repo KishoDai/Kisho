@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="COCO" default="war">
+	<property name="coco.webxml" value="E:\iCloud\workspace\COCO\WebContent\WEB-INF\web.xml" />
+	<property name="webContent.dir" value="E:\iCloud\workspace\COCO\WebContent" />
+	<property name="src.dir" value="E:\iCloud\workspace\COCO\src" />
+	<property name="war.dir" value="G:\WAR" />
+	<property name="dest.dir" value="G:\WAR\classes" />
+	<property name="lib.dir" value="E:\iCloud\workspace\commlib" />
+	<property name="junit.dir" value="D:\DevelopTools\eclipse\plugins\org.junit_3.8.2.v3_8_2_v20100427-1100" />
+	<property name="servlet.dir" value="D:\DevelopTools\应用服务器软件\apache-tomcat-7.0.22\lib" />
+	<property name="pattern" value="yyyyMMdd" />
+	<property name="app.name" value="COCO" />
+	<target name="init">
+		<delete dir="${dest.dir}" />
+		<mkdir dir="${dest.dir}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src.dir}" destdir="${dest.dir}" encoding="UTF-8">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar" />
+				</fileset >
+				<fileset dir="${junit.dir}">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${servlet.dir}">
+					<include name="servlet-api.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="war" depends="init,compile">
+		<tstamp>
+			<format property="currentTime" pattern="${pattern}" />
+		</tstamp>
+		<war destfile="${war.dir}\${app.name}_${currentTime}.war">
+			<fileset dir="${webContent.dir}">
+			</fileset>
+			<classes dir="${dest.dir}" />
+		</war>
+	</target>
+
+</project>

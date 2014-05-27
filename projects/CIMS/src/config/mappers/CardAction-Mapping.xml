@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="CardAction">
+    <sql id="commonSql" >
+        <where>
+            <if test = "cd_id != null and cd_id != ''">
+               cd_id like '%${cd_id}%'
+            </if>
+            <if test="cd_type != null and cd_type != ''">
+               and cd_type = #{cd_type}
+            </if>
+        </where>
+    </sql>
+
+	<select id="queryCardCount"  parameterType="card" resultType="int">
+		select count(*) from card
+		<include refid="commonSql"/>
+	</select>
+
+	<select id="queryPageList" parameterType="card" resultType="hashmap">
+		select *
+		from card
+		<include refid="commonSql"/>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+
+	<select id="queryCardByCardId" resultType="card" parameterType="string">
+		select * from card where cd_id = #{cd_id}
+	</select>
+
+	<insert id="addCard" parameterType="card">
+		insert into card(cd_id, cd_type,cd_balance,cd_send_datetime)
+		values(#{cd_id}, #{cd_type},#{cd_balance},#{cd_send_datetime})
+	</insert>
+	
+	<delete id="deleteCardByCardId" parameterType="string">
+		delete from card where cd_id = #{cd_id}
+	</delete>
+
+	<update id="updateCard" parameterType="card">
+		update card
+		<set>
+			cd_balance=#{cd_balance}
+		</set>
+		<where>
+			cd_id=#{cd_id}
+		</where>
+	</update>
+
+
+    <update id="updateCardBalance" parameterType="hashmap">
+        update card 
+        <set>
+           cd_balance = cd_balance +  #{addValueCard_balance}
+        </set>
+        <where>
+            cd_id = #{addValueCard_cd_id}
+        </where>
+    </update>
+    
+       <update id="updateCardBalance2" parameterType="string">
+        update card 
+        <set>
+           cd_balance = '0'
+        </set>
+        <where>
+            cd_id = #{cd_id}
+        </where>
+    </update>
+    
+</mapper>

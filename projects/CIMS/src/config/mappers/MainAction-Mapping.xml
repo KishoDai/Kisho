@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="MainAction">
+	<update id="updatePassword" parameterType="hashmap">
+	    update user set ur_password = #{ur_password} where ur_id = #{ur_id}
+	</update>
+
+</mapper>

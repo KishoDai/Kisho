@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="comment">
+     <sql id="wheresql">
+         <if test="userid !=null and userid !=''">
+	            and com.userid=#{userid}
+	         </if>
+	         <if test="relid !=null and relid !=''">
+	            and com.relid=#{relid}
+	         </if>
+	         <if test="reltyp !=null and reltyp !=''">
+	            and com.reltyp=#{reltyp}
+	         </if>
+     </sql>
+     <select id="queryCount" parameterType="comment" resultType="java.lang.Integer">
+		select count(com.comid) 
+	   from t_comment com,t_user user
+	   where com.userid=user.userid
+		<include refid="wheresql"/>
+	</select>
+	
+	<select id="queryPageList" parameterType="comment" resultType="comment" >
+	   select com.*,user.nicknam 
+	   from t_comment com,t_user user
+	   where com.userid=user.userid
+		<include refid="wheresql"/>
+		<if test="sort!=null and sort!=''">
+		   order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+     
+	<select id="queryCommentList" parameterType="comment" resultType="comment">
+	   select com.*,user.nicknam 
+	   from t_comment com,t_user user
+	   where com.userid=user.userid
+	    <include refid="wheresql"/>
+	</select>
+	
+	<select id="queryComment" parameterType="java.lang.String" resultType="comment">
+	   select com.*,user.nicknam 
+	   from t_comment com,t_user user
+	   where com.userid=user.userid
+	         and com.comid=#{comid}
+	</select>
+	
+	<delete id="deleteComment" parameterType="java.lang.String">
+	   delete from t_comment
+	   where comid=#{comid}
+	</delete>
+	
+	<delete id="deleteRelComment" parameterType="java.lang.String">
+	   delete from t_comment
+	   where relid=#{relid}
+	</delete>
+</mapper>

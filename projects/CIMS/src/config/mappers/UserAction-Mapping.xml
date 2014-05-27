@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="UserAction">
+        <sql id="whereQueryUser">
+       <where>
+           ur_level = '0'
+	       <if test="ur_status != null and ur_status != ''">
+			   and ur_status = #{ur_status}
+		   </if>
+		   <if test="ur_id != null and ur_id != ''">
+		       and (ur_id like '%${ur_id}%' or ur_name like '%${ur_name}%')
+		   </if>
+	   </where>
+    </sql>
+
+	<select id="queryUserCount" resultType="int">
+		select count(*) from user 
+		<include refid="whereQueryUser"/>
+	</select>
+
+	<select id="queryPageList" parameterType="user" resultType="hashmap">
+		select *
+		from user
+		<include refid="whereQueryUser"/>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+
+	<select id="queryUserByUserId" resultType="user" parameterType="string">
+		select a.*,b.sp_name from user a 
+		left join shop b
+		on a.sp_id = b.sp_id
+		where a.ur_id = #{ur_id}
+	</select>
+
+	<insert id="addUser" parameterType="user">
+		insert into user(ur_id, ur_name,ur_password,ur_status,ur_level,sp_id)
+		values(#{ur_id}, #{ur_name},#{ur_password},#{ur_status},'0',#{sp_id})
+	</insert>
+	
+	<update id="recoverInitPwd" parameterType="user">
+	    update user set ur_password = #{ur_password} where ur_id = #{ur_id}
+	</update>
+
+	<delete id="deleteUserByUserId" parameterType="string">
+		delete from user where ur_id = #{ur_id}
+	</delete>
+
+	<update id="updateUser" parameterType="user">
+		update user
+		<set>
+			ur_name=#{ur_name},
+			ur_status=#{ur_status},
+			sp_id = #{sp_id}
+		</set>
+		<where>
+			ur_id=#{ur_id}
+		</where>
+	</update>
+
+	<insert id="addUserRoleRel" parameterType="userRoleRel">
+		insert into user_role_rel(ur_id,re_id)
+		values(#{ur_id},#{re_id})
+	</insert>
+
+	<select id="queryUserRoleRelByUserIdAndRoleId" parameterType="userRoleRel"
+		resultType="userRoleRel">
+		select * from user_role_rel where ur_id = #{ur_id} and re_id = #{re_id}
+	</select>
+
+	<delete id="delUserRoleRel" parameterType="userRoleRel">
+		delete from user_role_rel
+		<where>
+			re_id = #{re_id} and ur_id = #{ur_id}
+		</where>
+	</delete>
+
+	<select id="queryUserRoleRelByUserId" parameterType="userRoleRel"
+		resultType="hashmap">
+		select * from user_role_rel where ur_id = #{ur_id}
+	</select>
+	
+	<delete id="delUserRoleRels" parameterType="hashmap">
+	    delete from user_role_rel
+	    <where>
+	        ur_id = #{ur_id}
+	        and re_id in
+	       <foreach open="(" separator="," close=")" collection="re_ids" item="re_id">
+	          #{re_id}
+	       </foreach>
+	    </where>
+	</delete>
+
+	<insert id="addUserRoleRels" parameterType="hashmap">
+		insert into user_role_rel(ur_id,re_id)
+		values
+		<foreach separator="," collection="re_ids" item="re_id">
+			(#{ur_id},#{re_id})
+		</foreach>
+	</insert>
+
+</mapper>

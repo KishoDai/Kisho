@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+   <menu title="产品管理" id="_product_manage_">
+      <submenu title="产品管理" id="_product_manage_1_" url="/product/product_to_iframe.action"/>
+      <submenu title="产品类型管理" id="_product_manage_3_" url="/product/product2_to_iframe.action"/>
+      <submenu title="产品分类管理" id="_product_manage_4_" url="/catalog/productcatalog_to_iframe.action?cattyp=0"/>
+   </menu>
+   <menu title="用户管理" id="_user_manage_">
+   
+      <submenu title="用户管理" id="_user_manage_1_" url="/user/user_to_iframe.action"/>
+   </menu>
+   <menu title="资讯管理" id="_info_manage_">
+      <submenu title="资讯管理" id="_info_manage_1_" url="/pubinfo/infopubinfo_to_iframe.action?infotyp=1"/>
+      <submenu title="资讯分类管理" id="_info_manage_2_" url="/catalog/infocatalog_to_iframe.action?cattyp=1"/>
+   </menu>
+   <menu title="活动管理" id="_activity_manage_">
+      <submenu title="活动管理" id="_activity_manage_1_" url="/pubinfo/activitypubinfo_to_iframe.action?infotyp=2"/>
+      <submenu title="活动分类管理" id="_activity_manage_2_" url="/catalog/activitycatalog_to_iframe.action?cattyp=2"/>
+   </menu>
+   <menu title="健康指南管理" id="_healthguide_manage_">
+      <submenu title="健康指南管理" id="_healthguide_manage_1_" url="/pubinfo/healthguidepubinfo_to_iframe.action?infotyp=3"/>
+      <submenu title="健康指南分类管理" id="_healthguide_manage_2_" url="/catalog/healthguidecatalog_to_iframe.action?cattyp=3"/>
+   </menu>
+   <menu title="官方信息管理" id="_official_manage_">
+      <submenu title="官方信息管理" id="_official_manage_1_" url="/officialinfo/officialinfo_to_iframe.action"/>
+   </menu>
+   <menu title="网站信息管理" id="_net_manage_">
+      <submenu title="网站标题管理" id="_net_title_manage_1_" url="/netinfo/nettitle_to_iframe.action?paramnam=press.front.title"/>
+      <submenu title="图片路径管理" id="_net_imagepath_manage_1_" url="/netinfo/imagepath_to_iframe.action?paramnam=image.path"/>
+   </menu>
+   <menu title="管理员信息管理" id="_admin_manage_">
+      <submenu title="管理员信息管理" id="_admin_manage_1_" url="/admin/admin_to_iframe.action"/>
+   </menu>
+   <menu title="文件上传管理" id="_file_upload_manage_">
+      <submenu title="文件上传管理" id="_file_upload_manage_1_" url="/fileupload/fileupload_to_iframe.action"/>
+   </menu>
+</menus>

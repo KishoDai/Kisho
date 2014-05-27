@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <package name="product" namespace="/product" extends="default">
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/product/product_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/product/product_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/product/product_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/product/product_view.jsp</result>
+			<result name="redirect_index" type="redirect">/product/product_to_index.action</result>
+		</action>
+		<action name="producttyp_*" class="producttypAction" method="{1}">
+		    <result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/product/producttyp/producttyp_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/product/producttyp/producttyp_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/product/producttyp/producttyp_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/product/producttyp/producttyp_view.jsp</result>
+			<result name="redirect_index" type="redirect">/product/producttyp_to_index.action</result>
+		</action>
+		<action name="product2_*" class="product2Action" method="{1}">
+		    <result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/product/product2/product2_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/product/product2/product2_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/product/product2/product2_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/product/product2/product2_view.jsp</result>
+			<result name="redirect_index" type="redirect">/product/product2_to_index.action</result>
+		</action>
+	</package>
+	
+</struts>

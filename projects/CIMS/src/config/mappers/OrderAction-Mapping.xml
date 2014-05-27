@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="OrderAction">
+
+    <sql id="whereSql">
+        <where>
+            sp_id = #{sp_id} 
+        </where>
+    </sql>
+
+	<select id="queryCustOrderCount" parameterType="string" resultType="int">
+		select count(*) from cust_order 
+		<include refid="whereSql"/>
+	</select>
+
+	<select id="queryPageList" parameterType="custOrder" resultType="hashmap">
+		select *
+		from cust_order
+		<include refid="whereSql"/>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${order}
+		</if>
+		limit #{startnum},#{limitcount}
+	</select>
+	
+	<select id = "queryOrderDishList" resultType="hashmap" parameterType="string">
+	    select a.*, concat(a.dh_id,'-',b.dh_name) as dh_name from order_dish a 
+	    left join dish b
+	    on a.dh_id = b.dh_id
+	     where a.or_id = #{or_id} 
+	</select>
+	
+	<select id = "queryOrderDishList2" resultType="hashmap" parameterType="string">
+	    select a.*, b.dh_name from order_dish a 
+	    left join dish b
+	    on a.dh_id = b.dh_id
+	     where a.or_id = #{or_id} 
+	</select>
+	
+	<select id="queryDishsByShopId" resultType="hashmap" parameterType="string">
+	     select dh_id  as "id", concat(dh_id,'-',dh_name) as "text" from dish where sp_id = #{shopId} 
+	     and dh_isleaf = '1'
+	</select>
+	
+	
+	<select id ="queryDishByDishId" parameterType="string" resultType="hashmap">
+	      select dh_id,dh_name,dh_price,dh_discount,'1' as od_amount from dish where dh_id = #{dh_id}
+	</select>
+	
+	<insert id="addOrder" parameterType="hashmap">
+	    insert into cust_order(or_id,or_balance,or_status,or_people_number,cd_id,or_datetime,ur_id,sp_id)
+	    values(#{or_id},#{or_balance},#{or_status},#{or_people_number},#{cd_id},#{or_datetime},#{ur_id},#{sp_id})
+	</insert>
+	
+	<insert id="addOrderDishList" parameterType="hashmap">
+	    insert into order_dish(ID,dh_id,od_amount,dh_price,or_id,od_datetime,dh_discount) values
+	    <foreach item="orderDish"  separator="," collection="list">
+	        (#{orderDish.ID},#{orderDish.dh_id},#{orderDish.od_amount},#{orderDish.dh_price},#{orderDish.or_id},#{orderDish.od_datetime},#{orderDish.dh_discount})
+	    </foreach>
+	    
+	</insert>
+	<select id="queryCardByCardId" parameterType="string" resultType="hashmap">
+	    select  * from card where cd_id = #{cd_id}
+	</select>
+	
+	<update id="updateOrderCardId" parameterType="hashmap">
+	    update cust_order set or_status = #{or_status} ,cd_id = #{cd_id} where or_id = #{or_id}
+	</update>
+	
+	<update id="updateCardBalance" parameterType="hashmap">
+	    update card set cd_balance = cd_balance - ${od_balance} where cd_id = #{cd_id}
+	</update>
+	
+	<insert id="addCardExpenseRecord" parameterType="hashmap">
+	    insert into card_expense_record(ID,cd_id,cer_operate_type,cer_operate_balance,or_id,ur_id,cer_datetime)
+	    values(#{ID},#{cd_id},#{cer_operate_type},#{cer_operate_balance},#{or_id},#{ur_id},#{cer_datetime})
+	</insert>
+	
+	<delete id="deleteOrder" parameterType="string">
+	     delete from cust_order where or_id = #{or_id}
+	</delete>
+	
+	<delete id="deleteOrderDish" parameterType="string">
+	     delete from order_dish where or_id = #{or_id}
+	</delete>
+	
+	<select id="queryOrderByOrderId" parameterType="string" resultType="hashmap">
+	     select * from cust_order where or_id = #{or_id}
+	</select>
+</mapper>

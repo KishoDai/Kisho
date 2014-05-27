@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <package name="catalog" namespace="/catalog" extends="default" abstract="">
+       <!-- 
+		<action name="catalog_*" class="catalogAction" method="{1}" >
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/catalog/catalog_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/catalog/catalog_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/catalog/catalog_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/catalog/catalog_view.jsp</result>
+			<result name="redirect_index" type="redirect">/catalog/catalog_to_index.action</result>
+		</action>
+		 -->
+		<action name="productcatalog_*" class="productcatalogAction" method="{1}" >
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/catalog/catalog_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/catalog/catalog_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/catalog/catalog_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/catalog/catalog_view.jsp</result>
+			<result name="redirect_index" type="redirect">/catalog/productcatalog_to_index.action</result>
+		</action>
+		
+		<action name="infocatalog_*" class="infocatalogAction" method="{1}" >
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/catalog/catalog_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/catalog/catalog_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/catalog/catalog_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/catalog/catalog_view.jsp</result>
+			<result name="redirect_index" type="redirect">/catalog/infocatalog_to_index.action</result>
+		</action>
+		<action name="activitycatalog_*" class="activitycatalogAction" method="{1}" >
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/catalog/catalog_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/catalog/catalog_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/catalog/catalog_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/catalog/catalog_view.jsp</result>
+			<result name="redirect_index" type="redirect">/catalog/activitycatalog_to_index.action</result>
+		</action>
+		
+		<action name="healthguidecatalog_*" class="healthguidecatalogAction" method="{1}" >
+			<result name="to_iframe">/WEB-INF/jsp/comm/iframe.jsp</result>
+			<result name="to_index">/WEB-INF/jsp/catalog/catalog_index.jsp</result>
+			<result name="to_add">/WEB-INF/jsp/catalog/catalog_add.jsp</result>
+			<result name="to_update">/WEB-INF/jsp/catalog/catalog_update.jsp</result>
+			<result name="to_view">/WEB-INF/jsp/catalog/catalog_view.jsp</result>
+			<result name="redirect_index" type="redirect">/catalog/healthguidecatalog_to_index.action</result>
+		</action>
+	</package>
+	
+</struts>

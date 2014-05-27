@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="LoginAction">
+	<select id="queryUser" parameterType="user" resultType="user">
+		SELECT a.*,b.sp_name
+		FROM user a
+		LEFT JOIN
+		shop b
+		ON a.sp_id = b.sp_id
+		WHERE a.ur_id=#{ur_id}
+		AND   a.ur_password=#{ur_password}
+	</select>
+</mapper>

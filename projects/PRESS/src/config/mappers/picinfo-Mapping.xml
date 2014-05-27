@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="picinfo">
+	<select id="queryPicInfoList" parameterType="picInfo" resultType="picInfo">
+		select *
+		from t_pic_info
+		where relid=#{relid}
+	</select>
+	<delete id="deletePicinfo" parameterType="picInfo">
+		delete
+		from t_pic_info
+		where picid=#{picid}
+	</delete>
+	
+	<delete id="deleteRelPicinfo" parameterType="picInfo">
+		delete
+		from t_pic_info
+		where relid=#{relid}
+	</delete>
+	<insert id="insertPicinfo" parameterType="picInfo">
+	   insert into t_pic_info(picid,relid,picnam,picremark)
+	   values(#{picid},#{relid},#{picnam},#{picremark})
+	</insert>
+</mapper>
