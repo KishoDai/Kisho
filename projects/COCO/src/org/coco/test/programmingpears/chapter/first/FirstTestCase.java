@@ -7,11 +7,11 @@ import junit.framework.TestCase;
 
 public class FirstTestCase extends TestCase {
 	public void test() {
-		String sourceFileName = "E:/iCloud/workspace/COCO/src/org/coco/test/programmingpears/chapter/first/source.txt";
-		String destinationFileName = "E:/iCloud/workspace/COCO/src/org/coco/test/programmingpears/chapter/first/destination.txt";
+		String sourceFileName = "G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\source.txt";
+		String destinationFileName = "G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\destination.txt";
 		
-		int count = 8000;
-		int range = 10000;
+		int count = 8000000;
+		int range = 10000000;
 		
 		long startTime = System.currentTimeMillis();
 		byte[] bytes = GenerateNotRepeatableRandomNumbers.generateRandomNumbers(count, range);
@@ -30,7 +30,7 @@ public class FirstTestCase extends TestCase {
 		
 		startTime = System.currentTimeMillis();
 		byte[] bytes2 = new byte[range];
-		BufferedReader br = ReadDataFromFile.getReaderStream(sourceFileName);
+		BufferedReader br = ReadUtils.getBufferedReader(sourceFileName);
 		String s = null;
 		try {
 			while((s = br.readLine()) != null){
