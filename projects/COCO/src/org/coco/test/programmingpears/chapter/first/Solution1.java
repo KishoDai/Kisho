@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Solution1 {
-
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
+		String sourceFile = "G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\source.txt";
 		BufferedReader br = ReadUtils
-				.getBufferedReader("G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\source.txt");
+				.getBufferedReader(sourceFile);
 		long[] lArr = new long[10000000 / 64 + 1];
 		String s = null;
 		try {
@@ -33,8 +33,9 @@ public class Solution1 {
 		}
 		System.out.println("use :" + (System.currentTimeMillis() - start)/1000);
 		PrintWriter pw = null;
+		String destFile = "G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\destination.txt";
 		try {
-			pw = WriteUtils.getPrintWriter("G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\destination.txt");
+			pw = WriteUtils.getPrintWriter(destFile);
 			for(int k = 0; k < lArr.length; k++){
 				for(int x = 0; x < 64; x++){
 					if((lArr[k] & (1l << x)) != 0){
