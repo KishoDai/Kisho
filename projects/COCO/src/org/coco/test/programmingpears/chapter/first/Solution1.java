@@ -1,7 +1,9 @@
 package org.coco.test.programmingpears.chapter.first;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Solution1 {
 
@@ -35,9 +37,27 @@ public class Solution1 {
 			}
 		}
 		System.out.println("use :" + (System.currentTimeMillis() - start)/1000);
-		for(long l : lArr){
-			System.out.println(l);
+		PrintWriter pw = null;
+		try {
+			File file = new File("G:\\GitHub\\Kisho\\projects\\COCO\\src\\org\\coco\\test\\programmingpears\\chapter\\first\\destination.txt");
+			if (!(!file.exists() ? file.createNewFile() : true)) {
+				throw new RuntimeException("文件不存在，创建文件不成功!");
+			}
+			pw = new PrintWriter(file);
+			for(int k = 0; k < lArr.length; k++){
+				for(int x = 0; x < 64; x++){
+					if((lArr[k] & (1l << x)) != 0){
+						pw.println(k * 64 + (x + 1));
+					}
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			pw.close();
 		}
+		System.out.println("use 2 : " + (System.currentTimeMillis() - start)/1000);
+		
 	}
 
 	private static void setData(long[] lArr, int i) {
